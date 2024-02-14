@@ -1,7 +1,7 @@
-const fs = require("fs");
+import { readFileSync, readFile, writeFileSync, writeFile } from "fs";
 
 // 동기적으로 파일 읽기
-const data = fs.readFileSync("example.txt", { encoding: "utf8", flag: "r" });
+const data = readFileSync("example.txt", { encoding: "utf8", flag: "r" });
 // console.log(data);
 // const temp = data.split("\n");
 // console.log(temp[temp.length - 2]);
