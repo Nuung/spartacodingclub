@@ -2,7 +2,10 @@ const fs = require("fs");
 
 // 동기적으로 파일 읽기
 const data = fs.readFileSync("example.txt", { encoding: "utf8", flag: "r" });
-console.log(data);
+// console.log(data);
+// const temp = data.split("\n");
+// console.log(temp[temp.length - 2]);
+
 // // 비동기적으로 파일 읽기
 // fs.readFile("example.txt", { encoding: "utf8", flag: "r" }, (err, data) => {
 //     if (err) throw err;
