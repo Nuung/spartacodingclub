@@ -1,10 +1,13 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient({
+    log: ["query", "info", "warn", "error"],
+});
 
 async function getAverageCommentCount() {
     // 먼저 모든 게시물에 대한 댓글 수를 집계
     const commentsPerPost = await prisma.comment.groupBy({
-        by: ['post_id'],
+        by: ["post_id"],
         _count: {
             comment_id: true,
         },
