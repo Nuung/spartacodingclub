@@ -53,13 +53,10 @@
 -- SQL for DBMS
 -- SQL for RDBMS
 
--- SELECT *
--- FROm user;
-
 -- SELECT * FROM post
 -- ORDER BY post_id;
 
-SELECT post.post_id, COUNT(comment.comment_id) AS comment_count
-FROM post
-LEFT JOIN comment ON post.post_id = comment.post_id
-GROUP BY post.post_id;
+-- SELECT post.post_id, COUNT(comment.comment_id) AS comment_count
+-- FROM post
+-- LEFT JOIN comment ON post.post_id = comment.post_id
+-- GROUP BY post.post_id;
