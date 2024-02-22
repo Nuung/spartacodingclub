@@ -25,7 +25,6 @@ async function getCommentCountsPerPost() {
 
     console.log(commentCounts);
     return commentCounts;
-
 }
 
 getCommentCountsPerPost()
