@@ -4,33 +4,33 @@ export class UserRepository {
     }
 
     // 사용자 생성
-    createUser(user) {
+    createUser = async (user) => {
         this.users.push(user);
         return user;
     }
 
     // 모든 사용자 조회
-    findAllUsers() {
+    findAllUsers = async () => {
         return this.users;
     }
 
     // ID로 사용자 조회
-    findUserById(userId) {
+    findUserById = async (userId) => {
         return this.users.find(user => user.id === userId);
     }
 
     // 사용자 업데이트
-    updateUser(userId, userData) {
+    updateUser = async (userId, id, name) => {
         const userIndex = this.users.findIndex(user => user.id === userId);
         if (userIndex !== -1) {
-            this.users[userIndex] = { ...this.users[userIndex], ...userData };
+            this.users[userIndex] = { id, name };
             return this.users[userIndex];
         }
         return null;
     }
 
     // 사용자 삭제
-    deleteUser(userId) {
+    deleteUser = async (userId) => {
         const userIndex = this.users.findIndex(user => user.id === userId);
         if (userIndex !== -1) {
             this.users.splice(userIndex, 1);

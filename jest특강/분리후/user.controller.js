@@ -4,9 +4,13 @@ export class UserController {
     }
 
     // 사용자 생성
-    createUser(req, res) {
+    createUser = async (req, res) => {
         try {
-            const user = this.userService.addUser(req.body);
+            const { id, name } = req.body;
+            if (!id || !name) {
+                throw new Error("ID와 이름은 필수입니다.");
+            }
+            const user = await this.userService.createUser(id, name);
             res.status(201).json(user);
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -14,39 +18,59 @@ export class UserController {
     }
 
     // 모든 사용자 조회
-    getAllUsers(req, res) {
-        res.json(this.userService.getAllUsers());
+    getAllUsers = async (req, res) => {
+        const users = await this.userService.getAllUsers();
+        res.json(users);
     }
 
     // ID로 사용자 조회
-    getUserById(req, res) {
-        const user = this.userService.getUserById(req.params.id);
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(404).json({ error: 'User not found' });
+    getUserById = async (req, res) => {
+        try {
+            const userId = req.params.id;
+            const user = await this.userService.getUserById(userId);
+            if (user) {
+                res.json(user);
+            }
+            else {
+                throw new Error("User not found");
+            }
+        } catch (error) {
+            res.status(400).json({ error: error.message });
         }
     }
 
     // 사용자 정보 업데이트
-    updateUser(req, res) {
-        const updatedUser = this.userService.updateUser(req.params.id, req.body);
-        if (updatedUser) {
-            res.json(updatedUser);
-        } else {
-            res.status(404).json({ error: 'User not found' });
+    updateUser = async (req, res) => {
+        try {
+            const userId = req.params.id;
+            const { id, name } = req.body;
+            if (!id || !name) {
+                throw new Error("업데이트 할 내용이 없습니다.");
+            }
+
+            const updatedUser = await this.userService.updateUser(userId, id, name);
+            if (updatedUser) {
+                res.json(updatedUser);
+            } else {
+                throw new Error("User not found");
+            }
+        } catch (error) {
+            res.status(400).json({ error: error.message });
         }
     }
 
     // 사용자 삭제
-    deleteUser(req, res) {
-        const isDeleted = this.userService.removeUser(req.params.id);
-        if (isDeleted) {
-            res.status(204).send();
-        } else {
-            res.status(404).json({ error: 'User not found' });
+    deleteUser = async (req, res) => {
+        try {
+            const userId = req.params.id;
+            const isDeleted = await this.userService.removeUser(userId);
+            if (isDeleted) {
+                res.status(204).json({});
+            } else {
+                throw new Error("User not found");
+            }
+        } catch (error) {
+            res.status(400).json({ error: error.message });
         }
     }
 }
-
-module.exports = UserController;

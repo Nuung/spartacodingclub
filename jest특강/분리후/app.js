@@ -4,7 +4,6 @@ import { UserRepository } from "./user.repository.js";
 import { UserService } from "./user.service.js";
 import { UserController } from "./user.controller.js";
 
-
 const app = express();
 const PORT = 3000;
 
@@ -16,11 +15,11 @@ const userService = new UserService(userRepository);
 const userController = new UserController(userService);
 
 // 사용자 관련 라우트 설정
-app.post("/users", (req, res) => userController.createUser(req, res));
-app.get("/users", (req, res) => userController.getAllUsers(req, res));
-app.get("/users/:id", (req, res) => userController.getUserById(req, res));
-app.put("/users/:id", (req, res) => userController.updateUser(req, res));
-app.delete("/users/:id", (req, res) => userController.deleteUser(req, res));
+app.get("/users", async (req, res) => await userController.getAllUsers(req, res));
+app.post("/user", async (req, res) => await userController.createUser(req, res));
+app.get("/user/:id", async (req, res) => await userController.getUserById(req, res));
+app.put("/user/:id", async (req, res) => await userController.updateUser(req, res));
+app.delete("/user/:id", async (req, res) => await userController.deleteUser(req, res));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
