@@ -31,9 +31,9 @@ describe("UserController", () => {
 
         await userController.createUser(mockReq, mockRes);
 
+        expect(mockUserService.createUser).toHaveBeenCalledWith(user.id, user.name);
         expect(mockRes.status).toHaveBeenCalledWith(201);
         expect(mockRes.json).toHaveBeenCalledWith(user);
-        expect(mockUserService.createUser).toHaveBeenCalledWith(user.id, user.name);
     });
 
     it("should return all users", async () => {

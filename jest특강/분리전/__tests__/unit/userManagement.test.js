@@ -79,29 +79,29 @@ describe("UserManagement", () => {
     // ============================================================ //
     // 2차 업데이트 이후
     // ============================================================ //
-    // it("should return 422 if req body are empty when creating a user", async () => {
-    //     mockReq.body = { id: "1" };
-    //     await userManagement.createUser(mockReq, mockRes);
-    //     expect(mockRes.status).toHaveBeenCalledWith(422);
-    //     expect(mockRes.json).toHaveBeenCalledWith({ error: "ID와 이름은 필수입니다." });
+    it("should return 422 if req body are empty when creating a user", async () => {
+        mockReq.body = { id: "1" };
+        await userManagement.createUser(mockReq, mockRes);
+        expect(mockRes.status).toHaveBeenCalledWith(422);
+        expect(mockRes.json).toHaveBeenCalledWith({ error: "ID와 이름은 필수입니다." });
 
-    //     mockReq.body = { name: "test" };
-    //     await userManagement.createUser(mockReq, mockRes);
-    //     expect(mockRes.status).toHaveBeenCalledWith(422);
-    //     expect(mockRes.json).toHaveBeenCalledWith({ error: "ID와 이름은 필수입니다." });
-    // });
+        mockReq.body = { name: "test" };
+        await userManagement.createUser(mockReq, mockRes);
+        expect(mockRes.status).toHaveBeenCalledWith(422);
+        expect(mockRes.json).toHaveBeenCalledWith({ error: "ID와 이름은 필수입니다." });
+    });
 
-    // it("should return 404 if user not found when updating a user", async () => {
-    //     mockReq.params.id = "2";
-    //     await userManagement.updateUser(mockReq, mockRes);
-    //     expect(mockRes.status).toHaveBeenCalledWith(404);
-    //     expect(mockRes.json).toHaveBeenCalledWith({ error: "User not found" });
-    // });
+    it("should return 404 if user not found when updating a user", async () => {
+        mockReq.params.id = "2";
+        await userManagement.updateUser(mockReq, mockRes);
+        expect(mockRes.status).toHaveBeenCalledWith(404);
+        expect(mockRes.json).toHaveBeenCalledWith({ error: "User not found" });
+    });
 
-    // it("should return 404 if user not found when deleting a user", async () => {
-    //     mockReq.params.id = "2";
-    //     await userManagement.deleteUser(mockReq, mockRes);
-    //     expect(mockRes.status).toHaveBeenCalledWith(404);
-    //     expect(mockRes.json).toHaveBeenCalledWith({ error: "User not found" });
-    // });
+    it("should return 404 if user not found when deleting a user", async () => {
+        mockReq.params.id = "2";
+        await userManagement.deleteUser(mockReq, mockRes);
+        expect(mockRes.status).toHaveBeenCalledWith(404);
+        expect(mockRes.json).toHaveBeenCalledWith({ error: "User not found" });
+    });
 });
