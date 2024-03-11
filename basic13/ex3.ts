@@ -1,5 +1,6 @@
 export class Logger {
     log(message: string): void {
+        throw new Error("알 수 없는 에러입니다!");
         console.log(message);
     }
 }

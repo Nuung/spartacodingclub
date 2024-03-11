@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Application = exports.Logger = void 0;
 class Logger {
     log(message) {
+        throw new Error("알 수 없는 에러입니다!");
         console.log(message);
     }
 }
